@@ -1,32 +1,51 @@
+var triList = [ 1,2,3];
+var colorList = ['#e85669', 
+'#0d678c',
+'#a6cf1d', 
+'#ffa90f', 
+'#62d5a6', 
+'#be56ae', 
+'#f0a234', 
+'#f1b6ee', 
+'#df4feb', 
+'#894206', 
+'#af3dab', 
+'#555bf6', 
+'#2b3027', 
+'#4dd10f', 
+'#4a55b7', 
+'#863a1b', 
+'#735561', 
+'#12cf18', 
+'#194f06', 
+'#62db8e', 
+'#41dd36'];
 function setup() {
-  createCanvas(500, 500);
-  angleMode(DEGREES);
-  noStroke();
-  fill('#D9DEE5');
-  rect(0,0,250,500);
-  noStroke();
-  fill('#3C3E40');
-  rect(250,0,250,500);
-  frameRate(12);
+ 
+  frameRate(4);
 }
 
 function draw() {
-  translate(250,height/2);
-
-  rotate(frameCount*3);
-  noFill();
-  stroke(lerpColor(color('#FFFFFF'), color('#000000'), frameCount/360));
-  ellipse(250,250,250,250);
-
-   stroke(lerpColor(color('#000000'), color('#FFFFFF'), frameCount/360));
-  
-  line(-1,0,-200*(cos(frameCount*3)),0);
-    stroke(lerpColor(color('#FFFFFF'), color('#000000'), frameCount/360));
-    line(1,0,200*(cos(frameCount*3)),0);
-
-
-
-    if (frameCount == 360) {
-    noLoop();
+  createCanvas(500, 500);
+   background(noise(frameCount)*256);
+  noStroke();
+  for(var x = 0; x < 500; x+=25)
+  {
+    for(var y = 0; y < 500; y+=25)
+    {
+    var index = floor(random() * triList.length);
+    var t = triList[index];
+    fill(color(random(colorList)));
+    if (t==1) {
+    triangle(x, y, (x+25), (y), (x+12.5), (y+25));
+    }
+    else if (t==2) {
+    triangle(x, y, (x), (y+20), (x+20), (y+20));
+    }
+    else if (t==3) {
+    triangle(x, y, (x), (y-40), (x+20), (y+20));
+    }
+    }
   }
+
 }
